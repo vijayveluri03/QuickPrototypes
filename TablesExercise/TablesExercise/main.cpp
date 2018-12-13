@@ -16,7 +16,7 @@ typedef int (*fpArithmaticAction)( int a, int b );
 typedef int (*fpRandomizeAction)( int a, int b, bool subdue, bool overdue  );
 
 void PerformTestOnMathTables();
-void PerformTest( fpArithmaticAction arithmaticActionCallback, fpRandomizeAction randomizeActionCallback, char* actionStr, char* signStr, bool secondNumberLessThanFirst = false, bool subdueSecondNumber = false );
+void PerformTest( fpArithmaticAction arithmaticActionCallback, fpRandomizeAction randomizeActionCallback, char* actionStr, char* signStr, bool                      secondNumberLessThanFirst = false, bool subdueSecondNumber = false );
 int GetRandomNumber(int startNum, int endNum );
 int GetInput( char* question );
 int ArithmaticActionSum( int a, int b );
@@ -26,25 +26,23 @@ int ArithmaticActionDivision( int a, int b );
 int ArithmaticActionReminder( int a, int b );
 int GetRandomNumber ( int a, int b, bool subdue, bool overdue );
 
+const int MIN_TABLE_MULTIPLIER = 2;
+const int MAX_TABLE_MULTIPLIER = 9;
+
 class TableUnit
 {
 public:
-    int a;
-    int b;
-    int mul;
-    int add;
-    
+    int a, b, mul, add;
     public: void Calculate ()
     {
-        mul = a*b;
-        add = a+b;
+        mul = a * b;
+        add = a + b;
     }
-    
 };
 
 int main(int argc, const char * argv[])
 {
-    switch (GetInput ("Which exam you would take? 1. Tables 2. Additions 3.Substractions 4. Multiplications 5. divisions 6. reminders: "))
+    switch (GetInput ("Choose the topic you want to take test in : 1. Multiplication tables 2. Additions 3.Substractions 4. Multiplications ( bigger numbers ) 5. divisions 6. reminders \n:"))
     {
         case 1:
             PerformTestOnMathTables();
@@ -65,24 +63,38 @@ int main(int argc, const char * argv[])
             PerformTest( &ArithmaticActionReminder, &GetRandomNumber, "Reminders", "%", false, true );
             break;
         default:
-            printf("Error. this condition is not handled!");
+            printf("Error. This option is invalid!");
             break;
     }
     
-    
     // insert code here...
-    printf("\n\nAll Done\n");
+    printf("\n");
     return 0;
 }
 
 void PerformTestOnMathTables()
 {
-    const int startTable = GetInput ("Enter starting table :");
-    const int endTable = GetInput ("Enter ending table : ");
-    const int startMultiplierNumber = 2;
-    const int endMultiplierNumber = 9;
-    const int repeatCount = GetInput ("Enter how many times you want to repeat the questions : ");
+    printf("Note: If you want to test yourself from 4th table to 9th table, your starting table would be 4 and ending table would be 9\n");
+    const int startTable = GetInput ("Enter starting table:");
+    const int endTable = GetInput ("Enter ending table:");
     
+    const int startMultiplierNumber = MIN_TABLE_MULTIPLIER;
+    const int endMultiplierNumber = MAX_TABLE_MULTIPLIER;
+    
+    if ( startTable > endTable )
+    {
+        printf("invalid entry");
+        return;           // todo: dontt exit, ask again
+    }
+    
+    printf("Note:Total number of questions you would face for 1 repetition is %d\n", ( endTable - startTable + 1 ) * ( endMultiplierNumber - startMultiplierNumber + 1 ) );
+    const int repeatCount = GetInput ("Enter repetition count ( minimum is 1):");
+    
+    if ( repeatCount < 1 )
+    {
+        printf("Repetition count should be greater than 1");
+        return;           // todo: dontt exit, ask again
+    }
     
     std::vector<TableUnit> tableUnits;
     
@@ -143,15 +155,17 @@ void PerformTestOnMathTables()
     printf("\nNumber of questions answered = %d", (totalCorrect + totalWrong));
     printf("\nTotal correct = %d", totalCorrect);
     printf("\nTotal wrong = %d", totalWrong);
-    if ( (totalCorrect+totalWrong) > 0 )
+    
+    if ( (totalCorrect + totalWrong) > 0 )
         printf("\nTotal time taken = %d mins %d secs. Avg time per question = %d secs", (int)(diffTimeInSecs/60.0f),(int)(diffTimeInSecs%60),(int)(diffTimeInSecs/(totalCorrect+totalWrong)));
 }
 
 void PerformTest( fpArithmaticAction arithmaticActionCallback, fpRandomizeAction randomizeActionCallback, char* actionStr, char* signStr, bool secondNumberLessThanFirst, bool subdueSecondNumber )
 {
-    const int startNumber = GetInput ("Min number :");;
-    const int endNumber = GetInput ("Max number :");;
-    const int questionCount = GetInput ("Question count :");
+    printf("Note: If you want to test yourself between numbers 40 & 90, the start value would be 40 and end value would be 90\n");
+    const int startNumber = GetInput ("Starting number:");
+    const int endNumber = GetInput ("Ending number:");
+    const int questionCount = GetInput ("How many questions would be like to face:");
     
     int totalCorrect = 0;
     int totalWrong = 0;
@@ -196,18 +210,22 @@ void PerformTest( fpArithmaticAction arithmaticActionCallback, fpRandomizeAction
     
     printf("\n\%s Exam complete betweeen %d & %d Numbers!", actionStr, startNumber, endNumber);
     printf("\nNumber of questions answered = %d", (totalCorrect + totalWrong));
+    
     printf("\nTotal correct = %d", totalCorrect);
     printf("\nTotal wrong = %d", totalWrong);
+    
     if ( (totalCorrect+totalWrong) > 0 )
         printf("\nTotal time taken = %d mins %d secs. Avg time per question = %d secs", (int)(diffTimeInSecs/60.0f),(int)(diffTimeInSecs%60),(int)(diffTimeInSecs/(totalCorrect+totalWrong)));
 }
 
 
 // Utility methods
-int GetRandomNumber(int startNum, int endNum )
-{
-    return (int)(rand() % (endNum - startNum) + startNum);
-}
+int GetRandomNumber(int startNum, int endNum )      { return (int)(rand() % (endNum - startNum) + startNum); }
+int ArithmaticActionSum( int a, int b )             { return a + b; }
+int ArithmaticActionSubstraction( int a, int b )    { return a - b; }
+int ArithmaticActionMultiplication( int a, int b )  { return a * b; }
+int ArithmaticActionDivision( int a, int b )        { return (int)((float)a / b); }
+int ArithmaticActionReminder( int a, int b )        { return a % b; }
 
 int GetInput( char* question )
 {
@@ -217,26 +235,6 @@ int GetInput( char* question )
     return option;
 }
 
-int ArithmaticActionSum( int a, int b )
-{
-    return a + b;
-}
-int ArithmaticActionSubstraction( int a, int b )
-{
-    return a - b;
-}
-int ArithmaticActionMultiplication( int a, int b )
-{
-    return a * b;
-}
-int ArithmaticActionDivision( int a, int b )
-{
-    return (int)((float)a / b);
-}
-int ArithmaticActionReminder( int a, int b )
-{
-    return a % b;
-}
 int GetRandomNumber ( int a, int b, bool subdue, bool overdue )
 {
     int rand = GetRandomNumber(a,b );
