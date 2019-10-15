@@ -1,0 +1,21 @@
+﻿<Properties StartupConfiguration="{6E4F3FEC-9C7C-5714-9761-B4993FA01983}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Perforce/mac_pro/Projects/DH16/Branches/RELEASE_5.1.2/Code/Client/DH16_Unity/Assets/Code/Tutorials/Conditions/TutorialCompleteCondition.cs">
+    <Files>
+      <File FileName="Assets/Shaders/Hologram.shader" Line="16" Column="11" />
+      <File FileName="Assets/Scripts/HoloManGlitcher.cs" Line="38" Column="54" />
+      <File FileName="../../Perforce/mac_pro/Projects/DH16/Branches/RELEASE_5.1.2/Code/Client/DH16_Unity/Assets/Components/Menus/LandingScreen/DogHuntClassicScreenComponent.cs" Line="162" Column="25" />
+      <File FileName="../../Perforce/mac_pro/Projects/DH16/Branches/RELEASE_5.1.2/Code/Client/DH16_Unity/Assets/Code/Tutorials/Conditions/TutorialCompleteCondition.cs" Line="30" Column="13" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/vijay.veluri/Perforce/mac_pro/Projects/DH16/Branches/RELEASE_5.1.2/Code/Client/DH16_Unity/Assets/Components/Menus/LandingScreen/DogHuntClassicScreenComponent.cs" line="174" column="4" />
+      <Breakpoint file="/Users/vijay.veluri/Perforce/mac_pro/Projects/DH16/Branches/RELEASE_5.1.2/Code/Client/DH16_Unity/Assets/Components/Menus/LandingScreen/DogHuntClassicScreenComponent.cs" line="139" column="1" />
+      <Breakpoint file="/Users/vijay.veluri/Perforce/mac_pro/Projects/DH16/Branches/RELEASE_5.1.2/Code/Client/DH16_Unity/Assets/Code/Tutorials/Conditions/TutorialCompleteCondition.cs" line="14" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
