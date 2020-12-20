@@ -15,3 +15,10 @@ Shaders_Test/ShaderInUnity/Library/
 Shaders_Test/ShaderInUnity/.vscode/
 Shaders_Test/ShaderInUnity/obj/
 Shaders_Test/ShaderInUnity/Temp/
+
+UnitySimpleChallenges/Temp
+UnitySimpleChallenges/obj
+UnitySimpleChallenges/Logs
+UnitySimpleChallenges/Library
+UnitySimpleChallenges/.vs
+UnitySimpleChallenges/.vscode
