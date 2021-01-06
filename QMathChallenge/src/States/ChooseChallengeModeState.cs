@@ -5,7 +5,7 @@ using QLib;
 
 namespace MC
 {
-    public class ChooseModeState : QLib.FSM.StateBase
+    public class ChooseChallengeModeState : QLib.FSM.StateBase
     {
         public class Context : QLib.FSM.iContext
         {
@@ -32,7 +32,7 @@ namespace MC
 
                 new ConsoleUtils.ActionParams("1", "1. Practice mode ", delegate (ConsoleUtils.ActionParamsContext context)
                 {
-                    _sm.PushInNextFrame(new ChooseDifficultyState().Initialize(_sm));
+                    _sm.PushInNextFrame(new ChooseDifficultyLevelState().Initialize(_sm));
                 }),
                 new ConsoleUtils.ActionParams("2", "2. Cumulative operations ", delegate (ConsoleUtils.ActionParamsContext context) {
 
@@ -65,7 +65,7 @@ namespace MC
         }
 
         // Private
-        ChallengeInput challengeInputs;
+        //QuestionProviderInput challengeInputs;
         Context context;
 
     }

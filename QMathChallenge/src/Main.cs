@@ -10,7 +10,7 @@ class Program
     {
         QLib.ConsoleWriter.PushColor(ConsoleColor.White);
         QLib.MainLoopWithFSM app = new QLib.MainLoopWithFSM();
-        app.PushState(new MC.ChooseModeState().Initialize(app.StateMachine), MC.ChooseModeState.GetContext( ()=> { app.Exit(); }));
+        app.PushState(new MC.ChooseChallengeModeState().Initialize(app.StateMachine), MC.ChooseChallengeModeState.GetContext( ()=> { app.Exit(); }));
         
         //app.PushState(new MC.ChooseDifficultyState().Initialize(app.StateMachine));
 

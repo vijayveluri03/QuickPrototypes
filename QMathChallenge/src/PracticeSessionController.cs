@@ -7,14 +7,14 @@ namespace MC
 {
     public class PracticeSessionController
     {
-        public PracticeSessionController(ChallengeInput challengeInputs)
+        public PracticeSessionController(QuestionProviderInput challengeInputs)
         {
             this._challengeInputs = challengeInputs;
         }
 
         public void StartSession()
         {
-            _questions = Questioner.GetQuestions(_challengeInputs, true);
+            _questions = QuestionProvider.GetQuestions(_challengeInputs, true);
             _sessionInProgress = true;
             _wasSessionCompleted = false;
             _currentQuestion = -1;
@@ -40,7 +40,7 @@ namespace MC
         {
             return _sessionInProgress && ((_currentQuestion + 1) < _questions.Length);
         }
-        public Question GetNextQuestion()
+        public QuestionProvider.Question GetNextQuestion()
         {
             if (_currentQuestion >= _questions.Length)
                 throw new Exception();
@@ -55,7 +55,7 @@ namespace MC
         }
         public void SetAnswerForCurrentQuestionAndEndSessionIfRequired(int ans)
         {
-            Question q = _questions[_currentQuestion];
+            QuestionProvider.Question q = _questions[_currentQuestion];
             
             if (ans == q.sol)
                 _passedQuestions.Add(q);
@@ -66,13 +66,13 @@ namespace MC
                 StopSession();
         }
 
-        ChallengeInput _challengeInputs;
-        Question[] _questions = null;
+        QuestionProviderInput _challengeInputs;
+        QuestionProvider.Question[] _questions = null;
         bool _sessionInProgress = false;
         int _currentQuestion = 0;
 
-        public List<Question> _failedQuestions { get; private set; } = new List<Question>();
-        public List<Question> _passedQuestions { get; private set; } = new List<Question>();
+        public List<QuestionProvider.Question> _failedQuestions { get; private set; } = new List<QuestionProvider.Question>();
+        public List<QuestionProvider.Question> _passedQuestions { get; private set; } = new List<QuestionProvider.Question>();
         public DateTime _startTime { get; private set; }
         public DateTime _endTime { get; private set; }
         public bool _wasSessionCompleted { get; private set; } = false;

@@ -5,7 +5,7 @@ namespace MC
 {
     public class UserData
     {
-        public List<Question> failedQuestions = new List<Question>();
+        public List<QuestionProvider.Question> failedQuestions = new List<QuestionProvider.Question>();
 
 
         

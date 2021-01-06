@@ -10,9 +10,9 @@ namespace MC
         public class Context : QLib.FSM.iContext
         {
             public int levelNumber;
-            public ChallengeInput challengeInputs;
+            public QuestionProviderInput challengeInputs;
         }
-        public static QLib.FSM.iContext GetContext(int levelNumber, ChallengeInput challengeInput)
+        public static QLib.FSM.iContext GetContext(int levelNumber, QuestionProviderInput challengeInput)
         {
             Context context = new Context();
             context.levelNumber = levelNumber;
@@ -64,8 +64,8 @@ namespace MC
 
             while ( controller.IsNextQuestionAvailable())
             {
-                Question q = controller.GetNextQuestion();
-                ConsoleWriter.Print($"{q.a} {q.op} {q.b}");
+                QuestionProvider.Question q = controller.GetNextQuestion();
+                ConsoleWriter.Print($"{q.a} {q.operatorStr} {q.b}");
                 int ans = ConsoleReader.GetUserInputInt("");
                 if (!controller.IsAnswerForCurrentQuestionRight(ans))
                     ConsoleWriter.PrintInColor("Naah. That was not right!", ConsoleColor.Yellow);
@@ -100,7 +100,7 @@ namespace MC
 
         // Private
         int level;
-        ChallengeInput challengeInputs;
+        QuestionProviderInput challengeInputs;
 
         PracticeSessionController controller;
     }
